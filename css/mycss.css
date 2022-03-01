@@ -71,9 +71,11 @@ body {
   .topnav input[type=text] {
     border: 1px solid #ccc;  
   }
+ 
 }
 
-main{
-    border: 1px solid;
-    
+#main{
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  row-gap: 20px;
 }

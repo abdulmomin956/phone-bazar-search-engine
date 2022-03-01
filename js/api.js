@@ -6,25 +6,35 @@ const phoneLoad = () => {
         .then(data => displayPhone(data.data))
 }
 const displayPhone = data => {
+    console.log(data)
     const container = document.getElementById('main');
-    for (const mobile of data) {
-        const phoneCard = document.createElement('div');
-        phoneCard.classList.add('col');
-        phoneCard.innerHTML = `
-        
-            <div class="card h-100">
-                <img style="max-width:240px" src="${mobile.image}" class="card-img-top" alt="...">
+    container.textContent = '';
+    if (data.length === 0) {
+        container.innerHTML = `<p>No mobile found</p>`
+    }
+    else {
+        for (const mobile of data) {
+            const phoneCard = document.createElement('div');
+
+
+            phoneCard.classList.add('card');
+            phoneCard.classList.add('mx-auto');
+            phoneCard.style.width = '18rem'
+            phoneCard.innerHTML = `
+            
+                <img src="${mobile.image}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">${mobile.phone_name}</h5>
                     <p class="card-text">${mobile.brand}</p>
+                    <a href="#" class="btn btn-primary">Detail</a>
                 </div>
-                <div class="card-footer">
-                    <button type="button" class="btn btn-secondary">Details</button>
-                </div>
-            </div>
-                    `;
-        container.appendChild(phoneCard);
-        // console.log(mobile)
+                        `;
+            container.appendChild(phoneCard);
+            console.log(mobile)
+        }
+
+
+
     }
 
 }
