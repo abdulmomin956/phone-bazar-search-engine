@@ -26,15 +26,22 @@ const displayPhone = data => {
                 <div class="card-body">
                     <h5 class="card-title">${mobile.phone_name}</h5>
                     <p class="card-text">${mobile.brand}</p>
-                    <a href="#" class="btn btn-primary">Detail</a>
+                    <a onclick="detailBtn('${mobile.slug}')" class="btn btn-primary">Detail</a>
                 </div>
                         `;
             container.appendChild(phoneCard);
-            console.log(mobile)
+            // console.log(mobile)
         }
 
 
 
     }
 
+}
+
+const detailBtn = data => {
+    url = `https://openapi.programming-hero.com/api/phone/${data}`;
+    fetch(url)
+        .then(res => res.json())
+        .then(data => console.log(data))
 }
