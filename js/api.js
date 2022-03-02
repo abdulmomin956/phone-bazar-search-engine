@@ -5,23 +5,21 @@ const phoneLoad = () => {
         .then(res => res.json())
         .then(data => displayPhone(data.data))
 }
-const displayPhone = data => {
+const displayPhone = mainArray => {
+    const data = mainArray.slice(0, 20);
     console.log(data)
     const container = document.getElementById('main');
     container.textContent = '';
     if (data.length === 0) {
-        container.innerHTML = `<p>No mobile found</p>`
+        container.innerHTML = `<p></p><p class="text-center text-danger">No mobile found</p>`
     }
     else {
         for (const mobile of data) {
             const phoneCard = document.createElement('div');
-
-
             phoneCard.classList.add('card');
             phoneCard.classList.add('mx-auto');
             phoneCard.style.width = '18rem'
             phoneCard.innerHTML = `
-            
                 <img src="${mobile.image}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">${mobile.phone_name}</h5>
@@ -48,15 +46,31 @@ const detailBtn = data => {
 
 const displayDetail = data => {
     const detailBox = document.getElementById('details');
-    detailBox.innerHTML = `
-    <img src="${data.image}">
-    <p>${data.releaseDate}</p>
-    <table id="table"></table>
-    `;
+    detailBox.textContent = '';
+    if (data.releaseDate === "") {
+        detailBox.innerHTML = `<div class="d-flex flex-column align-items-center">
+        <img src="${data.image}">
+        <p class="text-danger">There's no release date</p>
+        </div>
+        <table id="table">
+        <tr><th>Main Features:</th></tr>
+        </table>
+        `;
+    }
+    else {
+        detailBox.innerHTML = `<div class="d-flex flex-column align-items-center">
+        <img src="${data.image}">
+        <p>${data.releaseDate}</p>
+        </div>
+        <table id="table">
+        <tr><th>Main Features:</th></tr>
+        </table>
+        `;
+    }
     const features = data.mainFeatures;
     const pairs = Object.entries(features);
     const tableParent = document.getElementById('table');
-    tableParent.textContent = '';
+    // tableParent.textContent = '';
     for (const item of pairs) {
         const tr = document.createElement('tr');
         // comma separated array 
@@ -74,7 +88,7 @@ const displayDetail = data => {
     if (typeof data.others === 'object') {
         const tableParent2 = document.createElement('table');
         tableParent2.innerHTML = `
-        <tr><th style="font-weight:700;">Others</th></tr>
+        <tr><th style="font-weight:700;">Other Features</th></tr>
         `;
         const pairs2 = Object.entries(data.others);
         for (const item of pairs2) {
@@ -86,6 +100,6 @@ const displayDetail = data => {
     }
 
 
-    console.log(data.others);
+    console.log(data);
 }
 
