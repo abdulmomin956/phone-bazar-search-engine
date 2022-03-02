@@ -10,6 +10,7 @@ const displayPhone = mainArray => {
     const data = mainArray.slice(0, 20);
     const container = document.getElementById('main');
     container.textContent = '';
+    document.getElementById('details').innerHTML = '';
     if (data.length === 0) {
         container.innerHTML = `<p></p><p class="text-center text-danger">No mobile found</p>`
     }
