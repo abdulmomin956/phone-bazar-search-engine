@@ -1,3 +1,4 @@
+// phone search and grid js code 
 const phoneLoad = () => {
     const keyWord = document.getElementById('key-word').value;
     url = `https://openapi.programming-hero.com/api/phones?search=${keyWord}`
@@ -7,7 +8,6 @@ const phoneLoad = () => {
 }
 const displayPhone = mainArray => {
     const data = mainArray.slice(0, 20);
-    console.log(data)
     const container = document.getElementById('main');
     container.textContent = '';
     if (data.length === 0) {
@@ -28,15 +28,10 @@ const displayPhone = mainArray => {
                 </div>
                         `;
             container.appendChild(phoneCard);
-            // console.log(mobile)
         }
-
-
-
     }
-
 }
-
+// detail button function and show into page 
 const detailBtn = data => {
     url = `https://openapi.programming-hero.com/api/phone/${data}`;
     fetch(url)
@@ -67,10 +62,10 @@ const displayDetail = data => {
         </table>
         `;
     }
+    // feature part 
     const features = data.mainFeatures;
     const pairs = Object.entries(features);
     const tableParent = document.getElementById('table');
-    // tableParent.textContent = '';
     for (const item of pairs) {
         const tr = document.createElement('tr');
         // comma separated array 
@@ -83,8 +78,8 @@ const displayDetail = data => {
             tr.innerHTML = `<td>${item[0]}: </td><td>${item[1]}</td>`;
             tableParent.appendChild(tr);
         }
-        // console.log(item[0], item[1]);
     }
+    // other part 
     if (typeof data.others === 'object') {
         const tableParent2 = document.createElement('table');
         tableParent2.innerHTML = `
@@ -98,8 +93,5 @@ const displayDetail = data => {
         }
         detailBox.appendChild(tableParent2);
     }
-
-
-    console.log(data);
 }
 
