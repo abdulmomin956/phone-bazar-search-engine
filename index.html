@@ -29,7 +29,7 @@
         <!-- search button part -->
         <div class="search-container">
             <input type="text" placeholder="Search your phone" id="key-word" name="search">
-            <button onclick="phoneLoad()"><i class="fa fa-search"></i></button>
+            <button id="myBtn" onclick="phoneLoad()"><i class="fa fa-search"></i></button>
         </div>
     </div>
     <main id="main-body">
@@ -47,6 +47,17 @@
             </div>
         </section>
     </main>
+
+    <!-- The Modal -->
+    <div id="welcomeModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Search Your Phone</h2>
+            <p>Enter your phone details to see the results</p>
+            <input type="text" id="phoneSearch" placeholder="Search your phone">
+            <button id="searchBtn">Search</button>
+        </div>
+    </div>
 
 
     <!-- my js code  -->

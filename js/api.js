@@ -1,6 +1,6 @@
 // phone search and grid js code 
-const phoneLoad = () => {
-    const keyWord = document.getElementById('key-word').value;
+const phoneLoad = (key) => {
+    const keyWord = key || document.getElementById('key-word').value;
     url = `https://openapi.programming-hero.com/api/phones?search=${keyWord}`
     fetch(url)
         .then(res => res.json())
@@ -95,4 +95,58 @@ const displayDetail = data => {
         detailBox.appendChild(tableParent2);
     }
 }
+
+var input = document.getElementById("key-word");
+input.addEventListener("keypress", function (event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        document.getElementById("myBtn").click();
+    }
+});
+
+
+// Get the modal
+const modal = document.getElementById("welcomeModal");
+
+// Get the <span> element that closes the modal
+const span = document.getElementsByClassName("close")[0];
+
+// When the page loads, open the modal 
+window.onload = function () {
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function () {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+// Search button functionality
+document.getElementById("searchBtn").addEventListener("click", function () {
+    const searchTerm = document.getElementById("phoneSearch").value;
+    if (searchTerm) {
+        //alert("Searching for: " + searchTerm);
+        phoneLoad(searchTerm)
+        // Here you would typically call your search function
+        // searchPhones(searchTerm);
+        modal.style.display = "none";
+    } else {
+        alert("Please enter a phone model to search");
+    }
+});
+
+var input = document.getElementById("phoneSearch");
+input.addEventListener("keypress", function (event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        document.getElementById("searchBtn").click();
+    }
+});
 
